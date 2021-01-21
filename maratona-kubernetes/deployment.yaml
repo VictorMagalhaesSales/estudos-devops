@@ -18,15 +18,15 @@ spec:
         app: pods-deployment
     spec:
       containers:
-      - name: servidor-nginxs
+      - name: container-nginx
         image: nginx:1.17-alpine
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         resources:
           requests:
             memory: 54Mi
-            cpu: 500m
+            cpu: 100m
           limits: 
             memory: 54Mi
-            cpu: 500m
+            cpu: 100m
         ports:
-        - containerPort: 8080
+        - containerPort: 80
