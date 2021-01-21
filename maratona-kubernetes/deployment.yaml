@@ -1,9 +1,14 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: maratona-deployment
 spec:
   replicas: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 2
   selector: ## para modificar os pods que já estiverem no ar
     matchLabels:
       app: pods-deployment
@@ -15,5 +20,13 @@ spec:
       containers:
       - name: servidor-nginxs
         image: nginx:1.17-alpine
+        imagePullPolicy: Never
+        resources:
+          requests:
+            memory: 54Mi
+            cpu: 500m
+          limits: 
+            memory: 54Mi
+            cpu: 500m
         ports:
-        - containerPor: 80
+        - containerPort: 8080
