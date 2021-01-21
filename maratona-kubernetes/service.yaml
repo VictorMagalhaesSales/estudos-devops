@@ -5,6 +5,6 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: maratona-deployment
+    app: pods-deployment
   ports:
-  -  port: 8080
+  -  port: 80
