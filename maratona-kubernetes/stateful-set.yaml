@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: maratona-sts
+spec:
+  selector:
+    matchLabels:
+      app: app-maratona-sts
+  serviceName: maratona-service
+  replicas: 3
+  volumeClaimTemplates:
+  - metadata:
+      name: maratona-storage-sts
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: standard
+      resources:
+        requests:
+          storage: 10Mi
+  template:
+    metadata:
+      labels:
+        app: app-maratona-sts
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: container-nginx-sts
+        image: nginx:1.17-alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: maratona-storage-sts
+          mountPath: /usr/share/nginx/html
+    
+      
