@@ -1,1 +1,15 @@
-version: '3'services:    rancher-server:        image: rancher/server:latest        environment:             - DB_HOST=mysql            - DB_PORT=3306            - DB_NAME=rancherdb            - DB_USER=root            - DB_PASS=123456        volumes:            - /mysql_rcv1:/var/lib/mysql        ports:            - 8080:8080
+version: '3'
+
+services:
+    rancher-server:
+        image: rancher/server:latest
+        environment: 
+            - DB_HOST=mysql
+            - DB_PORT=3306
+            - DB_NAME=rancherdb
+            - DB_USER=root
+            - DB_PASS=123456
+        volumes:
+            - /home/victor/workspace/devops/devops-codes/rancher-server/data:/var/lib/mysql
+        ports:
+            - 8080:8080
